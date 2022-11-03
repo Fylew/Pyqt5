@@ -1,20 +1,21 @@
 import random
 import datetime
+def podshet_Tonn():
+    date = datetime.datetime.now()
+    line = 60
+    proizvod = 950
+    weight_beg = 500
+    num_beg = 1
+    if line == 60:
+        proizvod += proizvod * 4.5/100
 
-def podshet_lit():
-    num = 8
-    day_or_night = "ночь"
+    for i in range(num_beg, 20):
+        if i == num_beg:
+            tonn_in_min = round((1000-weight_beg) / (proizvod / 60),2)
+            print("Эту тонну нужно добить осталось {} минут(а)".format(round(tonn_in_min)))
+        else:
+            tonn_in_min = round(1000/ (proizvod / 60),2)
+        date += datetime.timedelta(minutes=tonn_in_min)
+        print("{} тонна будет готова в {}".format(i+1,date.strftime("%d.%m %H:%M")))
 
-    if day_or_night == 'день':
-        date = datetime.time(7,00)
-
-    else:
-        date = datetime.time(19,00)
-
-    print(date.strftime("%H:%M"))
-
-    for i in range(1,num+1):
-        date += datetime.timedelta(minutes = 1)
-        print(date)
-
-podshet_lit()
+podshet_Tonn()
