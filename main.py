@@ -78,11 +78,28 @@ class App(QWidget):
         self.menu_tonn = uic.loadUi("menu_tonn.ui")
         self.menu_tonn.show()
         self.menu_tonn.pushButton.clicked.connect(lambda: self.click_tonn(self.menu_tonn.comboBox_2.currentText(),self.menu_tonn.lineEdit.text(),self.menu_tonn.lineEdit_2.text(),self.menu_tonn.comboBox_3.currentText(),self.menu_tonn.comboBox.currentText()))
-
+    def click_bunk(self,count_beg,proiz,tonn_weight):
+        date = datetime.datetime.now()
+        self.bunk_out = uic.loadUi("Bunk_out.ui")
+        self.bunk_out.show()
+        pr = int(proiz)
+        count_beg = int(count_beg)
+        tonn_weight = int(tonn_weight)
+        kg = (tonn_weight / pr) * 60
+        for i in range(1,count_beg+1):
+            if i == 0:
+                date += datetime.timedelta(minutes=kg)
+                self.bunk_out.textBrowser.setText("Бег {} закончится в {}".format(i,date.strftime("%H:%M")))
+            else:
+                date += datetime.timedelta(minutes=kg)
+                self.bunk_out.textBrowser.append("Бег {} закончится в {}".format(i,date.strftime("%H:%M")))
+        kg = (900 / pr) * 60
+        date += datetime.timedelta(minutes=kg)
+        self.bunk_out.textBrowser.append("Бункер опустеет в {}".format(date.strftime("%H:%M")))
     def bunk_button(self):
-        # self.menu_bunk = uic.loadUi("menu_tonn.ui")
-        # self.menu_bunk.show()
-        pass
+        self.menu_bunk = uic.loadUi("bumk_menu.ui")
+        self.menu_bunk.show()
+        self.menu_bunk.pushButton.clicked.connect(lambda: self.click_bunk(self.menu_bunk.comboBox.currentText(),self.menu_bunk.lineEdit.text(),self.menu_bunk.lineEdit_2.text()))
 
     def button(self):
         self.main_menu.pushButton_4.clicked.connect(lambda: self.lit_button())
