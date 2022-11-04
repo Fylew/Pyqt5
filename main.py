@@ -51,7 +51,7 @@ class App(QWidget):
         self.menu_lit.show()
         self.menu_lit.pushButton.clicked.connect(lambda: self.click_lit(self.menu_lit.comboBox.currentText(),self.menu_lit.comboBox_2.currentText()))
 
-    def click_tonn(self,line,proiz,weight,num_beg):
+    def click_tonn(self,line,proiz,weight,num_beg,ob_beg):
 
         self.vivod_tonn = uic.loadUi("tonn.ui")
         self.vivod_tonn.show()
@@ -61,23 +61,23 @@ class App(QWidget):
         proizvod = int(proiz)
         weight_beg = int(weight)
         num_beg = int(num_beg)
-
+        ob_beg = int(ob_beg)
         if line == 60:
             proizvod += proizvod * 4.5 / 100
 
         for i in range(num_beg, 20):
             if i == num_beg:
-                tonn_in_min = round((1000 - weight_beg) / (proizvod / 60), 2)
+                tonn_in_min = round((ob_beg - weight_beg) / (proizvod / 60), 2)
                 self.vivod_tonn.textBrowser.setText("Эту тонну нужно добить осталось {} минут(а)".format(round(tonn_in_min)))
             else:
-                tonn_in_min = round(1000 / (proizvod / 60), 2)
+                tonn_in_min = round(ob_beg / (proizvod / 60), 2)
             date += datetime.timedelta(minutes=tonn_in_min)
             self.vivod_tonn.textBrowser.append("{} тонна будет готова в {}".format(i, date.strftime("%d.%m %H:%M")))
 
     def tonn_button(self):
         self.menu_tonn = uic.loadUi("menu_tonn.ui")
         self.menu_tonn.show()
-        self.menu_tonn.pushButton.clicked.connect(lambda: self.click_tonn(self.menu_tonn.comboBox_2.currentText(),self.menu_tonn.lineEdit.text(),self.menu_tonn.lineEdit_2.text(),self.menu_tonn.comboBox_3.currentText()))
+        self.menu_tonn.pushButton.clicked.connect(lambda: self.click_tonn(self.menu_tonn.comboBox_2.currentText(),self.menu_tonn.lineEdit.text(),self.menu_tonn.lineEdit_2.text(),self.menu_tonn.comboBox_3.currentText(),self.menu_tonn.comboBox.currentText()))
 
     def bunk_button(self):
         # self.menu_bunk = uic.loadUi("menu_tonn.ui")
