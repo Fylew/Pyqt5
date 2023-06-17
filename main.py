@@ -106,7 +106,7 @@ class App(QWidget):
         self.main_menu.pushButton_3.clicked.connect(lambda: self.tonn_button())
         self.main_menu.pushButton_5.clicked.connect(lambda: self.bunk_button())
 
-if __name__ =="__main__":
+if __name__ == "__main__":
     app = QApplication(sys.argv)
     ex = App()
     app.exec_()
